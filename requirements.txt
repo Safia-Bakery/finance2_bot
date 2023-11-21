@@ -1,0 +1,8 @@
+SQLAlchemy
+python-jose
+pydantic[email]
+pytz
+psycopg2-binary
+requests
+python-telegram-bot
+python-dotenv
