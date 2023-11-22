@@ -95,6 +95,7 @@ class SphereUsers(Base):
     sp_user = relationship('Users',back_populates='user_sp')
     status =Column(Integer,default=0)
     sequence = Column(Integer)
+    name = Column(String,nullable=True)
 
 
 class Payers(Base):
