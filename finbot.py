@@ -36,6 +36,7 @@ import crud
 import re
 import os 
 from database import session
+import service
 
 
 bot_token = os.getenv('BOT_TOKEN')
@@ -113,10 +114,14 @@ async def handle_callback_query(update:Update, context: ContextTypes.DEFAULT_TYP
         if history.status==1:
             users = crud.get_sphere_user(db=session,order_id=history.order_id,sphere_id=history.hi_order.sphere_id)
             if users:
-                print('new history created ')
                 crud.history_create(db=session,user_id=users.user_id,order_id=history.order_id)
+                order = crud.order_get_with_id(db=session,order_id=history.order_id)
+                message = f"Заявка #{order.id}s\n🔘Тип: {order.order_sp.name}\n🙍‍♂Заказчик: {order.purchaser}\n📦Товар: {order.title}\n👨‍💼Поставщик: {order.supplier}\n💰Стоимость: {order.price} UZS\n💲Тип оплаты: {payment_type[order.payment_type]}\n💳Плательщик: {order.order_py.name}\nℹ️Описание: {order.comment}\nСрочно: {is_urgent[order.is_urgent]}"
+                try:
+                    service.sendtotelegram(bot_token=bot_token,chat_id=users.sp_user.tg_id,message_text=message)
+                except:
+                    pass
             else:
-                print('there is no other user ')
                 crud.order_status_update(db=session,order_id=history.order_id,status=1)
         else:
             crud.order_status_update(db=session,order_id=history.order_id,status=2)

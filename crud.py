@@ -43,3 +43,7 @@ def order_status_update(db:Session,order_id,status):
     query.status=status
     db.commit()
     return True
+
+def order_get_with_id(db:Session,order_id):
+    query = db.query(models.Orders).filter(models.Orders.id==order_id).first()
+    return query
