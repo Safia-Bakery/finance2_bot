@@ -37,7 +37,8 @@ import re
 import os 
 from database import session
 import service
-
+payment_type = ['by card','cash']
+is_urgent  = ['NO','YES']
 
 bot_token = os.getenv('BOT_TOKEN')
 
