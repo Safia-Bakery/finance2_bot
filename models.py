@@ -73,6 +73,7 @@ class Users(Base):
     user_role = relationship('Roles',back_populates='role_user')
     tg_id = Column(BIGINT,nullable=True)
     user_hi = relationship('History',back_populates='hi_user')
+    show = Column(Integer,default=0)
 
 
 
@@ -96,7 +97,6 @@ class SphereUsers(Base):
     status =Column(Integer,default=0)
     sequence = Column(Integer)
     name = Column(String,nullable=True)
-    show = Column(Integer,default=0)
 
 
 class Payers(Base):
