@@ -96,6 +96,7 @@ class SphereUsers(Base):
     status =Column(Integer,default=0)
     sequence = Column(Integer)
     name = Column(String,nullable=True)
+    show = Column(Integer,default=0)
 
 
 class Payers(Base):
